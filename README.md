@@ -1,0 +1,1 @@
+﻿This project was done as a submission for PA FBLA's Coding and Programming competition. The goal was to create a program that auto-generated quizzes from a 50-question bank. To create this project, I used WPF (C#, Windows Presentation Framework) to create the desktop UI and SQLite as a backend database. 

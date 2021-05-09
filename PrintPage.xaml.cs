@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
- 
+
 namespace FBLAQuestions {
     /// <summary>
     /// Interaction logic for PrintPage.xaml
@@ -31,6 +31,7 @@ namespace FBLAQuestions {
 
                 if (q.Type == QuestionType.TF) {
                     if (q.Correct) {
+                        // TODO: make ✓ and ✗ diff colors, general layout improvements (font?)
                         line.Inlines.Add("✓  " + q.Text);
                         fd.Blocks.Add(line);
                         foreach (string ans in new string[] { "True", "False" }) {
@@ -69,7 +70,7 @@ namespace FBLAQuestions {
                         ans = q.CorrectAns;
                         line = new();
                         line.Foreground = Brushes.Green;
-                        line.Inlines.Add(" -  " + ans); 
+                        line.Inlines.Add(" -  " + ans);
                         fd.Blocks.Add(line);
                     }
 
@@ -97,7 +98,7 @@ namespace FBLAQuestions {
         }
 
         private void Print_Click(object sender, RoutedEventArgs e) {
-            PrintDialog pd = new PrintDialog();
+            PrintDialog pd = new();
             if (pd.ShowDialog() != true) return;
 
             fd.PageHeight = pd.PrintableAreaHeight;
@@ -108,6 +109,7 @@ namespace FBLAQuestions {
             pd.PrintDocument(idocument.DocumentPaginator, "Printing Document...");
         }
 
+        // TODO: change this to "Back to Main Menu" instead of being stuck back to QuizOptions
         private void TakeAnother_Click(object sender, RoutedEventArgs e) {
             mainWindow.Navigate("QuizOptions.xaml");
         }

@@ -1,10 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
- 
+
 //TODO: refactor all XAML to follow a more consistent order
 //TODO: include "leaderboard" or quiz history for a user 
 //          - user "insights?", suggest "you have a 40% average with --- questions, I suggest studying more from [source URL]
-//TODO: add in all 50 questions
 
 namespace FBLAQuestions {
     /// <summary>
@@ -32,18 +31,16 @@ namespace FBLAQuestions {
         private void WriteWelcomeText() {
             object findWelcomeText = FindName("WelcomeText");
             object findStatsText = FindName("StatsText");
-            if (findWelcomeText is Label && findStatsText is Label) {
-                Label statsText = (Label)findStatsText;
-                Label welcomeText = (Label)findWelcomeText;
+            if (findWelcomeText is Label welcomeLabel && findStatsText is Label statsLabel) {
                 User u = DatabaseConnection.GetUserData(mainWindow.UserName);
                 if (u != null) {
                     mainWindow.User = u;
-                    welcomeText.Content = $"Welcome back, {mainWindow.UserName}";
-                    statsText.Content = $"Your last quiz score was a {u.LastScore}%, and your lifetime average is {u.Percent}% over {u.Quizzes} quizzes";
+                    welcomeLabel.Content = $"Welcome back, {mainWindow.UserName}";
+                    statsLabel.Content = $"Your last quiz score was a {u.LastScore}%, and your lifetime average is {u.Percent}% over {u.Quizzes} quizzes";
                 } else {
-                    welcomeText.Content = $"Welcome, {mainWindow.UserName}";
+                    welcomeLabel.Content = $"Welcome, {mainWindow.UserName}";
                     mainWindow.User = DatabaseConnection.AddUser(mainWindow.UserName);
-                    statsText.Content = "Take your first quiz!";
+                    statsLabel.Content = "Take your first quiz!";
                 }
             } else {
                 throw new System.InvalidOperationException("Error in reading Name");

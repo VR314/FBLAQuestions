@@ -6,9 +6,9 @@ using System.Data;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.Linq;
- 
+
 namespace FBLAQuestions {
-    class DatabaseConnection {
+    internal class DatabaseConnection {
         private static string LoadConnectionString(string id = "Default") {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }
@@ -18,7 +18,7 @@ namespace FBLAQuestions {
         /// </summary>
         /// <param name="qt"></param>
         /// <returns></returns>
-        public static Question[] LoadQuestions(QuestionType[] qt) {
+        public static Question[] LoadFiveQuestions(QuestionType[] qt) {
             using (var cnn = new SQLiteConnection(LoadConnectionString())) {
                 cnn.Open();
                 var command = cnn.CreateCommand();
@@ -46,10 +46,10 @@ namespace FBLAQuestions {
                     }
                 }
 
-                
-                var temp = questions.OrderBy(x => new Random().Next()).ToArray<Question>()[0..5];
-                while(!ValidArrangement(qt, temp)) {
-                    temp = questions.OrderBy(x => new Random().Next()).ToArray<Question>()[0..5];
+                // TODO: optimize Quiz generation
+                var temp = questions.OrderBy(x => new Random().Next()).ToArray()[0..5];
+                while (!ValidArrangement(qt, temp)) {
+                    temp = questions.OrderBy(x => new Random().Next()).ToArray()[0..5];
                 }
                 for (int i = 0; i < temp.Length; i++) {
                     temp[i].Index = i;
@@ -67,8 +67,8 @@ namespace FBLAQuestions {
         private static bool ValidArrangement(QuestionType[] qt, Question[] questions) {
             bool contains = true;
             foreach (QuestionType qtt in qt) {
-                if(contains)
-                    contains = questions.Count(q => q.Type == qtt) > 0;
+                if (contains)
+                    contains = questions.Any(q => q.Type == qtt);
             }
             return contains;
         }
@@ -107,9 +107,7 @@ namespace FBLAQuestions {
                     }
                 }
 
-
                 var bindingList = new BindingList<Question>(questions);
-
                 return bindingList;
             }
         }

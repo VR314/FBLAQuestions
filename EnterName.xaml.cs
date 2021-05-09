@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
- 
+
 namespace FBLAQuestions {
     /// <summary>
     /// Interaction logic for EnterName.xaml
@@ -28,8 +28,8 @@ namespace FBLAQuestions {
 
             string name;
 
-            if (nameBox is TextBox) {
-                name = ((TextBox)nameBox).Text;
+            if (nameBox is TextBox box) {
+                name = box.Text;
 
             } else {
                 throw new System.InvalidOperationException("Error in reading text from NameBox");
@@ -49,11 +49,11 @@ namespace FBLAQuestions {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void NameBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
-            if (sender is TextBox) {
-                if (((TextBox)sender).Foreground == Brushes.Gray) {
+            if (sender is TextBox box) {
+                if (box.Foreground == Brushes.Gray) {
                     //If nothing has been entered yet.
-                    ((TextBox)sender).Text = "";
-                    ((TextBox)sender).Foreground = Brushes.Black;
+                    box.Text = "";
+                    box.Foreground = Brushes.Black;
                 }
             } else {
                 throw new System.InvalidOperationException("Cannot read NameBox correctly");

@@ -61,7 +61,7 @@ namespace FBLAQuestions {
             for (int i = 0; i < temp.Length; i++) {
                 options[i] = (QuestionType)(temp[i]);
             }
-            questions = DatabaseConnection.LoadQuestions(options);
+            questions = DatabaseConnection.LoadFiveQuestions(options);
         }
 
         private void Render(Question question) {

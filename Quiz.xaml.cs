@@ -1,8 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
- 
+
 namespace FBLAQuestions {
     /// <summary>
     /// Interaction logic for Quiz.xaml
@@ -78,7 +79,7 @@ namespace FBLAQuestions {
                     RenderDropdown(question);
                     break;
                 default:
-                    throw new System.InvalidOperationException("Invalid question type");
+                    throw new InvalidOperationException("Invalid question type");
             }
         }
 
@@ -89,9 +90,11 @@ namespace FBLAQuestions {
             StackPanel qpanel = new();
             qpanel.Children.Add(label);
             qpanel.Margin = new Thickness(2, 2, 2, 5);
-            //TODO: shuffle answer choices
 
-            foreach (string ans in question.Answers) {
+            // Shuffle answer choices
+            Random rand = new();
+            string[] shuffledList = question.Answers.OrderBy(c => rand.Next()).ToArray();
+            foreach (string ans in shuffledList) {
                 RadioButton rb = new();
                 rb.Content = ans;
                 rb.Checked += Rb_Checked;
@@ -158,16 +161,18 @@ namespace FBLAQuestions {
             StackPanel qpanel = new();
             qpanel.Children.Add(label);
             qpanel.Margin = new Thickness(2, 2, 2, 5);
-            //TODO: shuffle answer choices
             ComboBox cb = new();
             //TODO: add margins to RadioButtons and ComboBoxes
             cb.Tag = question;
             cb.SelectionChanged += Cb_SelectionChanged;
-            foreach (string ans in question.Answers) {
+
+            // Shuffle answer choices
+            Random rand = new();
+            string[] shuffledList = question.Answers.OrderBy(c => rand.Next()).ToArray();
+            foreach (string ans in shuffledList) {
                 cb.Items.Add(ans);
             }
             qpanel.Children.Add(cb);
-
 
             stackPanel.Children.Add(qpanel);
         }
@@ -180,4 +185,3 @@ namespace FBLAQuestions {
         }
     }
 }
- 

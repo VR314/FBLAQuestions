@@ -109,7 +109,7 @@ namespace FBLAQuestions {
             pd.PrintDocument(idocument.DocumentPaginator, "Printing Document...");
         }
 
-        // TODO: change this to "Back to Main Menu" instead of being stuck back to QuizOptions
+        // TODO: change this to "Back to Main Menu" instead of being stuck back to QuizOptions OR add another button to go to main menu
         private void TakeAnother_Click(object sender, RoutedEventArgs e) {
             mainWindow.Navigate("QuizOptions.xaml");
         }

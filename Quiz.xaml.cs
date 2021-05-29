@@ -14,11 +14,11 @@ namespace FBLAQuestions {
         private Question[] questions;
         private StackPanel stackPanel;
         public Quiz() {
-            FontFamily = new FontFamily("Bahnschrift SemiLight SemiCondensed");
-            FontSize = 18.5;
             InitializeComponent();
             mainWindow = (MainWindow)Application.Current.MainWindow;
             stackPanel = (StackPanel)(FindName("MainStackPanel"));
+            FontFamily = new FontFamily("Segoe UI");
+            FontSize = 20;
             GenerateQuestions();
             foreach (Question q in questions) {
                 Render(q);
@@ -27,8 +27,10 @@ namespace FBLAQuestions {
             Button submit = new();
             submit.Content = "SUBMIT";
             submit.Click += Submit_Click;
-            submit.Margin = new Thickness(5, 1, 5, 5);
-            submit.Height = 25;
+            submit.Margin = new Thickness(5, 15, 5, 5);
+            submit.HorizontalAlignment = HorizontalAlignment.Center;
+            submit.MinWidth = 100;
+            submit.MinHeight = 25;
             stackPanel.Children.Add(submit);
         }
 
@@ -84,18 +86,21 @@ namespace FBLAQuestions {
         }
 
         private void RenderMC(Question question) {
-            Label label = new();
-            label.Content = $"{question.Index + 1}.  {question.Text}";
-            label.Margin = new Thickness(0, 2, 2, 1);
+            TextBlock textBlock = new();
+            textBlock.Text = $"{question.Index + 1}.  {question.Text}";
+            textBlock.Margin = new Thickness(0, 2, 2, 1);
+            textBlock.TextWrapping = TextWrapping.WrapWithOverflow;
             StackPanel qpanel = new();
-            qpanel.Children.Add(label);
-            qpanel.Margin = new Thickness(2, 2, 2, 5);
+            qpanel.Children.Add(textBlock);
+            qpanel.Margin = new Thickness(0, 5, 5, 5);
 
             // Shuffle answer choices
             Random rand = new();
             string[] shuffledList = question.Answers.OrderBy(c => rand.Next()).ToArray();
             foreach (string ans in shuffledList) {
                 RadioButton rb = new();
+                rb.Margin = new Thickness(5, 2, 1, 1);
+                rb.FontSize = 18;
                 rb.Content = ans;
                 rb.Checked += Rb_Checked;
                 rb.Tag = question;
@@ -109,20 +114,22 @@ namespace FBLAQuestions {
             string chosen = (string)((RadioButton)sender).Content;
             Question q = (Question)((RadioButton)sender).Tag;
             q.Chosen = chosen;
-            //TODO: eliminate answers array, since everything is already saved in the Question objects
         }
 
         private void RenderFill(Question question) {
-            Label label = new();
-            label.Margin = new Thickness(0, 2, 2, 1);
-            label.Content = $"{question.Index + 1}.  {question.Text}";
+            TextBlock textBlock = new();
+            textBlock.Text = $"{question.Index + 1}.  {question.Text}";
+            textBlock.Margin = new Thickness(0, 2, 2, 1);
+            textBlock.TextWrapping = TextWrapping.WrapWithOverflow;
             StackPanel qpanel = new();
-            qpanel.Children.Add(label);
-            qpanel.Margin = new Thickness(2, 2, 2, 5);
+            qpanel.Children.Add(textBlock);
+            qpanel.Margin = new Thickness(0, 5, 5, 5);
+
 
             TextBox tb = new();
             tb.Tag = question;
             tb.TextChanged += Tb_TextChanged;
+            tb.Margin = new Thickness(5, 2, 1, 1);
             qpanel.Children.Add(tb);
 
             stackPanel.Children.Add(qpanel);
@@ -135,16 +142,19 @@ namespace FBLAQuestions {
         }
 
         private void RenderTF(Question question) {
-            Label label = new();
-            label.Margin = new Thickness(0, 2, 2, 1);
-            label.Content = $"{question.Index + 1}.  {question.Text}";
+            TextBlock textBlock = new();
+            textBlock.Text = $"{question.Index + 1}.  {question.Text}";
+            textBlock.Margin = new Thickness(0, 2, 2, 1);
+            textBlock.TextWrapping = TextWrapping.WrapWithOverflow;
             StackPanel qpanel = new();
-            qpanel.Children.Add(label);
-            qpanel.Margin = new Thickness(2, 2, 2, 5);
+            qpanel.Children.Add(textBlock);
+            qpanel.Margin = new Thickness(0, 5, 5, 5);
 
             string[] tf = new string[] { "True", "False" };
             foreach (string ans in tf) {
                 RadioButton rb = new();
+                rb.Margin = new Thickness(5, 2, 1, 1);
+                rb.FontSize = 18;
                 rb.Content = ans;
                 rb.Checked += Rb_Checked;
                 rb.Tag = question;
@@ -155,14 +165,16 @@ namespace FBLAQuestions {
         }
 
         private void RenderDropdown(Question question) {
-            Label label = new();
-            label.Margin = new Thickness(0, 2, 2, 1);
-            label.Content = $"{question.Index + 1}.  {question.Text}";
+            TextBlock textBlock = new();
+            textBlock.Text = $"{question.Index + 1}.  {question.Text}";
+            textBlock.Margin = new Thickness(0, 2, 2, 1);
+            textBlock.TextWrapping = TextWrapping.WrapWithOverflow;
             StackPanel qpanel = new();
-            qpanel.Children.Add(label);
-            qpanel.Margin = new Thickness(2, 2, 2, 5);
+            qpanel.Children.Add(textBlock);
+            qpanel.Margin = new Thickness(0, 5, 5, 5);
             ComboBox cb = new();
-            //TODO: add margins to RadioButtons and ComboBoxes
+            cb.Margin = new Thickness(5, 2, 1, 1);
+            cb.MinWidth = 100;
             cb.Tag = question;
             cb.SelectionChanged += Cb_SelectionChanged;
 

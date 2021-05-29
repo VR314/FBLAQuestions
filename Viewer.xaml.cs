@@ -14,6 +14,8 @@ namespace FBLAQuestions {
         public Viewer() {
             InitializeComponent();
             mainWindow = (MainWindow)Application.Current.MainWindow;
+            // TODO: use threading? tiny but of lag when this is running OR make this global and run this in the background on startup and load this directly from global: partially solved by virtualization?
+            // Dispatch expensive calls either within the UI thread with a lower DispatcherPriority by calling Dispatcher.BeginInvoke() or to a background thread by using a BackgroundWorker to keep the UI responsive. (https://www.wpftutorial.net/10PerformanceTips.html)
             var MCs = DatabaseConnection.LoadAllQuestions(new QuestionType[] { QuestionType.MC, QuestionType.Dropdown });
             BindingList<DisplayQuestion> MCbl = new();
             foreach (var MC in MCs) {

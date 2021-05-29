@@ -8,20 +8,23 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Quiz">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="19*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled"  >
-            <StackPanel Name="MainStackPanel" Orientation="Vertical">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="18*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Name="MainStackPanel" Grid.Column="1" Orientation="Vertical" Margin="5, 2, 12, 2" HorizontalAlignment="Center">
                 <Label Content="Quiz" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 12, 0, 0" FontFamily="Bahnschrift SemiLight SemiCondensed" FontSize="48" />
                 <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
                 
             </StackPanel>
-        </ScrollViewer>
-    </Grid>
+
+        </Grid>
+    </ScrollViewer>
 </Page>

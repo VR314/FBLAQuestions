@@ -46,7 +46,7 @@ namespace FBLAQuestions {
                     }
                 }
 
-                // TODO: optimize Quiz generation
+                // TODO: optimize Quiz generation: instead of randomly generating & testing
                 var temp = questions.OrderBy(x => new Random().Next()).ToArray()[0..5];
                 while (!ValidArrangement(qt, temp)) {
                     temp = questions.OrderBy(x => new Random().Next()).ToArray()[0..5];
@@ -177,13 +177,6 @@ namespace FBLAQuestions {
                 cnn.Open();
                 var command = cnn.CreateCommand();
                 command.CommandText = ("INSERT INTO Users(Name, Correct, Incorrect, QuizzesTaken, LastQuizScore) VALUES(\"" + name + "\",\"0\",\"0\",\"0\",\"0\")");
-                /*
-                command.Parameters.Add("name", DbType.String).Value = "\"" + name + "\"";
-                command.Parameters.Add("correct", DbType.String).Value = "0";
-                command.Parameters.Add("incorrect", DbType.String).Value = "0";
-                command.Parameters.Add("quizzes", DbType.String).Value = "0";
-                command.Parameters.Add("lastScore", DbType.String).Value = "0";
-                */
                 command.ExecuteNonQuery();
             }
 

@@ -19,12 +19,13 @@ namespace FBLAQuestions {
         /// [3] = Dropdown
         /// </summary>
         public bool[] Options { get; set; }
+        //TODO: turn this into a Dictionary to more clearly access elements -- causes problems in GenerateQuestions() method
 
         public Question[] Questions { get; set; }
 
         public MainWindow() {
             InitializeComponent();
-            MainFrame.Navigate(new Uri("EnterName.xaml", UriKind.Relative));
+            Navigate("EnterName.xaml");
             Options = new bool[4];
             Questions = new Question[5];
         }

@@ -15,7 +15,7 @@
         <DockPanel Grid.Row="0">
             <TabControl Name="tabControl" >
                 <TabItem Header="MC/Dropdown">
-                    <DataGrid AutoGenerateColumns="False" x:Name="gridMC" VerticalAlignment="Top" HorizontalScrollBarVisibility="Disabled">
+                    <DataGrid AutoGenerateColumns="False" x:Name="gridMC" VerticalAlignment="Top" HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="3*" Header="Question" Binding="{Binding Text}">
                                 <DataGridTextColumn.ElementStyle>
@@ -42,7 +42,7 @@
                     </DataGrid>
                 </TabItem>
                 <TabItem Header="TF/Fill-In" >
-                    <DataGrid AutoGenerateColumns="False" x:Name="gridFill" VerticalAlignment="Top" HorizontalScrollBarVisibility="Disabled">
+                    <DataGrid AutoGenerateColumns="False" x:Name="gridFill" VerticalAlignment="Top" HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" IsReadOnly="True" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="3*" Header="Question" Binding="{Binding Text}">
                                 <DataGridTextColumn.ElementStyle>
